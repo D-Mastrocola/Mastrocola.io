@@ -1,54 +1,32 @@
+//r
 import './App.css';
 import algorandLogo from './algorand-algo-logo.svg';
 import MyAlgo from '@randlabs/myalgo-connect';
-import algosdk from "algosdk";
+
 
 
 const { MyAlgoWallet } = require('@randlabs/myalgo-connect');
 
+const algosdk = require('algosdk');
 
+const token = {
+  'X-API-Key': 'dNKutsYJR97M3WUuTeDMJ4EmYJpR1UhI1UhAi4Uo'
+};
+const server = 'https://testnet-algorand.api.purestake.io/ps2';
+const port = "";
 
-const myAlgoWallet = new MyAlgo();
+const algodClient = new algosdk.Algodv2(token, server, port);
 
-const algodClient = new algosdk.Algodv2('', 'https://api.testnet.algoexplorer.io', '');
+let secretKey = 'rally umbrella garlic shiver medal embrace regret foam reject select custom dress just crazy benefit announce busy unable cereal head valve educate ride absorb regret';
+let account1 = algosdk.generateAccount();
 
-
-myAlgoWallet.connect()
-  .then((accounts) => {
-    let txn = {
-      fee: 1000,
-      type: 'pay',
-      from: accounts[0].address,
-      to: '4SZTEUQIURTRT37FCI3TRMHSYT5IKLUPXUI7GWC5DZFXN2DGTATFJY5ABY',
-      amount: 1000000, // 1 algo
-      firstRound: 12449335,
-      lastRound: 12450335,
-      genesisHash: "SGO1GKSzyE7IEPItTxCByw9x8FmnrCDexi9/cOUJOiI=",
-      genesisID: "testnet-v1.0"
-    };
-
-    myAlgoWallet.signTransaction(txn)
-      .then((signedTxn) => {
-        console.log(signedTxn);
-
-        algodClient.sendRawTransaction(signedTxn.blob).do()
-          .then((txn) => {
-            console.log(txn);
-            // { txId: "IMXOKHFRXGJUBDNOHYB5H6HASYACQ3PE5R6VFWLW4QHARFWLTVTQ" }
-          })
-      })
-      .catch((err) => {
-        // Error
-      });
-
-  })
-  .catch((err) => {
-    // Error
-  });
-
-
-
-
+(async () => {
+  let account_info = (await algodClient.accountInformation(account1.addr.do()));
+  let acct_string = JSON.stringify(account_info);
+  console.log("Account Info: " + acct_string);
+})().catch(e=> {
+  console.log(e)
+});
 
 
 function App() {
@@ -57,11 +35,6 @@ function App() {
       <div className='container'>
         <div className='d-flex row'>
           <h1>Welcome to Mastrocola.io</h1>
-          <div>
-            <button className='btn btn-primary m-1'>Explore</button>
-            <button className='btn btn-primary m-1'>Create</button>
-            <button className='btn btn-primary m-1'>Profile</button>
-          </div>
         </div>
 
       </div>
