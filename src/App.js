@@ -7,6 +7,7 @@ import MyAlgo from '@randlabs/myalgo-connect';
 
 const { MyAlgoWallet } = require('@randlabs/myalgo-connect');
 
+
 const algosdk = require('algosdk');
 
 const token = {
@@ -18,13 +19,16 @@ const port = "";
 const algodClient = new algosdk.Algodv2(token, server, port);
 
 let secretKey = 'rally umbrella garlic shiver medal embrace regret foam reject select custom dress just crazy benefit announce busy unable cereal head valve educate ride absorb regret';
-let account1 = algosdk.generateAccount();
+let recoveredAccount = algosdk.mnemonicToSecretKey(secretKey);
+
+let account_info = '';
+let acct_string = '';
 
 (async () => {
-  let account_info = (await algodClient.accountInformation(account1.addr.do()));
-  let acct_string = JSON.stringify(account_info);
+  account_info = (await algodClient.accountInformation(recoveredAccount.addr).do());
+  acct_string = JSON.stringify(account_info);
   console.log("Account Info: " + acct_string);
-})().catch(e=> {
+})().catch(e => {
   console.log(e)
 });
 
@@ -35,6 +39,7 @@ function App() {
       <div className='container'>
         <div className='d-flex row'>
           <h1>Welcome to Mastrocola.io</h1>
+          <p>Account Address: {account_info.address}</p>
         </div>
 
       </div>
