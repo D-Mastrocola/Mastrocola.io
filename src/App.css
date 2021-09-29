@@ -2,6 +2,12 @@
   text-align: center;
 }
 
+header {
+  height: 70px;
+}
+main {
+  height: calc(100% - 70px);
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
