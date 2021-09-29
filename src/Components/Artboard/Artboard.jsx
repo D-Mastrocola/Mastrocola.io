@@ -2,7 +2,6 @@ import { Component } from "react";
 import React from "react";
 import p5 from "p5";
 
-
 class Artboard extends Component {
   constructor(props) {
     super(props);
@@ -11,25 +10,56 @@ class Artboard extends Component {
   initalizeArtboard(p) {
     let width = 400;
     let height = 400;
-    let x = 100;
-    let y = 100;
-    let gridSize = width/16;
+    let mouseIsDown = false;
+    let gridSize = width / 16;
 
     p.setup = () => {
       p.createCanvas(400, 400);
-      p.background(0)
+      p.background(255);
     };
 
-    p.draw = () => {
+    p.draw = () => {};
+    let drawPixel = (x, y) => {
+      p.fill(0);
+      p.noStroke();
+      p.rect(x * gridSize, y * gridSize, gridSize, gridSize);
+    };
+    p.mouseDragged = () => {
+      if(!mouseIsDown) return;
+      if (
+        p.mouseX >= 0 &&
+        p.mouseX < width &&
+        p.mouseY >= 0 &&
+        p.mouseY < height
+      ) {
+        let gridNode = [
+          Math.floor(p.mouseX / gridSize),
+          Math.floor(p.mouseY / gridSize),
+        ];
+        p.fill(0);
+        p.noStroke();
+        drawPixel(gridNode[0], gridNode[1]);
+      }
     };
     p.mousePressed = () => {
-      console.log(p.mouseX)
-      if(p.mouseX >= 0 && p.mouseX < width && p.mouseY >= 0 && p.mouseY < height) {
-        let gridNode = [Math.floor(p.mouseX/gridSize),Math.floor(p.mouseY/gridSize)]
-        p.fill(255)
+      mouseIsDown = true;
+      if (
+        p.mouseX >= 0 &&
+        p.mouseX < width &&
+        p.mouseY >= 0 &&
+        p.mouseY < height
+      ) {
+        let gridNode = [
+          Math.floor(p.mouseX / gridSize),
+          Math.floor(p.mouseY / gridSize),
+        ];
+        p.fill(0);
         p.noStroke();
-        p.rect(gridNode[0] * gridSize, gridNode[1] * gridSize, gridSize, gridSize)
+        drawPixel(gridNode[0], gridNode[1]);
       }
+    };
+    p.mouseReleased = () => {
+      mouseIsDown = false;
     }
   }
   componentDidMount() {
@@ -39,7 +69,7 @@ class Artboard extends Component {
     return (
       <main className="col-12 d-flex justify-content-center flex-column align-items-center">
         <h2>Pixel Editor</h2>
-        <div ref={this.myRef}></div>
+        <div className="border border-2 border-dark" ref={this.myRef}></div>
         <button className="btn btn-primary">Submit</button>
       </main>
     );
