@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/Mastrocola.io/static/css/main.9139ddb8.chunk.css",
+    "main.js": "/Mastrocola.io/static/js/main.5e1a0eb0.chunk.js",
+    "main.js.map": "/Mastrocola.io/static/js/main.5e1a0eb0.chunk.js.map",
+    "runtime-main.js": "/Mastrocola.io/static/js/runtime-main.a4344392.js",
+    "runtime-main.js.map": "/Mastrocola.io/static/js/runtime-main.a4344392.js.map",
+    "static/js/2.41c22b6e.chunk.js": "/Mastrocola.io/static/js/2.41c22b6e.chunk.js",
+    "static/js/2.41c22b6e.chunk.js.map": "/Mastrocola.io/static/js/2.41c22b6e.chunk.js.map",
+    "static/js/3.09ddb755.chunk.js": "/Mastrocola.io/static/js/3.09ddb755.chunk.js",
+    "static/js/3.09ddb755.chunk.js.map": "/Mastrocola.io/static/js/3.09ddb755.chunk.js.map",
+    "index.html": "/Mastrocola.io/index.html",
+    "static/css/main.9139ddb8.chunk.css.map": "/Mastrocola.io/static/css/main.9139ddb8.chunk.css.map",
+    "static/js/2.41c22b6e.chunk.js.LICENSE.txt": "/Mastrocola.io/static/js/2.41c22b6e.chunk.js.LICENSE.txt",
+    "static/media/algorand-algo-logo.2015fd2c.svg": "/Mastrocola.io/static/media/algorand-algo-logo.2015fd2c.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.a4344392.js",
+    "static/js/2.41c22b6e.chunk.js",
+    "static/css/main.9139ddb8.chunk.css",
+    "static/js/main.5e1a0eb0.chunk.js"
+  ]
+}
