@@ -2,7 +2,7 @@ import './App.css';
 import { Component } from 'react';
 import Header from './Components/Header/Header.jsx';
 import Artboard from './Components/Artboard/Artboard.jsx';
-import algorandLogo from './algorand-algo-logo.svg';
+import algorandLogo from './assets/images/algorand-algo-logo.svg';
 
 
 
