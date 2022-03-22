@@ -2,13 +2,15 @@ import { Component } from "react";
 import React from "react";
 import p5, { Color } from "p5";
 
+import Controls from "./Controls/Controls";
+
 class Artboard extends Component {
   constructor(props) {
     super(props);
     this.myRef = React.createRef();
     this.state = {
       penType: "squarePen",
-      penSize: 4,
+      penSize: 1,
       penColor: [0, 0, 0],
     };
   }
@@ -99,9 +101,12 @@ class Artboard extends Component {
   render() {
     return (
       <main className="col-12 bg-secondary d-flex justify-content-center flex-column align-items-center">
-        <h2>Pixel Editor</h2>
-        <div ref={this.myRef}></div>
-        <button className="btn btn-primary">Submit</button>
+        <Controls />
+        <div>
+          <h2>Pixel Editor</h2>
+          <div ref={this.myRef}></div>
+          <button className="btn btn-primary">Submit</button>
+        </div>
       </main>
     );
   }
