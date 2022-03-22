@@ -6,8 +6,14 @@ class Artboard extends Component {
   constructor(props) {
     super(props);
     this.myRef = React.createRef();
+    this.state = {
+      penType: "squarePen",
+      penSize: 4,
+      penColor: [0, 0, 0],
+    };
   }
   initalizeArtboard(p) {
+    console.log(p);
     let width = 400;
     let height = 400;
     let mouseIsDown = false;
@@ -20,12 +26,18 @@ class Artboard extends Component {
 
     p.draw = () => {};
     let drawPixel = (x, y) => {
-      p.fill(0);
+      let drawSize = this.state.penSize * gridSize;
+      p.fill(...this.state.penColor);
       p.noStroke();
-      p.rect(x * gridSize, y * gridSize, gridSize, gridSize);
+      p.rect(
+        x * gridSize - (drawSize - gridSize) / 2,
+        y * gridSize - (drawSize - gridSize) / 2,
+        drawSize,
+        drawSize
+      );
     };
     p.mouseDragged = () => {
-      if(!mouseIsDown) return;
+      if (!mouseIsDown) return;
       if (
         p.mouseX >= 0 &&
         p.mouseX < width &&
@@ -60,10 +72,10 @@ class Artboard extends Component {
     };
     p.mouseReleased = () => {
       mouseIsDown = false;
-    }
+    };
   }
   componentDidMount() {
-    this.myP5 = new p5(this.initalizeArtboard, this.myRef.current);
+    this.myP5 = new p5(this.initalizeArtboard.bind(this), this.myRef.current);
   }
   render() {
     return (
