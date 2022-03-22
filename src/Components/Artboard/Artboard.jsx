@@ -1,6 +1,6 @@
 import { Component } from "react";
 import React from "react";
-import p5 from "p5";
+import p5, { Color } from "p5";
 
 class Artboard extends Component {
   constructor(props) {
@@ -19,9 +19,28 @@ class Artboard extends Component {
     let mouseIsDown = false;
     let gridSize = width / 16;
 
+    let drawBackgroundLayer = () => {
+      let color = [p.color(255), p.color(150, 150, 150)];
+      p.noStroke();
+      let colorSwitch = 0;
+      for (let x = 0; x * gridSize < width; x++) {
+        for (let y = 0; y * gridSize < height; y++) {
+          //even number
+          if (colorSwitch % 2 === 0) {
+            p.fill(color[0]);
+          } else {
+            p.fill(color[1]);
+          }
+          p.rect(x * gridSize, y * gridSize, gridSize, gridSize);
+          colorSwitch++;
+        }
+        colorSwitch++;
+      }
+    };
     p.setup = () => {
       p.createCanvas(400, 400);
-      p.background(255);
+      drawBackgroundLayer();
+      //p.background(255);
     };
 
     p.draw = () => {};
@@ -79,9 +98,9 @@ class Artboard extends Component {
   }
   render() {
     return (
-      <main className="col-12 d-flex justify-content-center flex-column align-items-center">
+      <main className="col-12 bg-secondary d-flex justify-content-center flex-column align-items-center">
         <h2>Pixel Editor</h2>
-        <div className="border border-2 border-dark" ref={this.myRef}></div>
+        <div ref={this.myRef}></div>
         <button className="btn btn-primary">Submit</button>
       </main>
     );
